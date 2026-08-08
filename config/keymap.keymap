@@ -41,27 +41,6 @@
     scroll-layers = <3>;
 };
 
-/ {
-    combos {
-        compatible = "zmk,combos";
-
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <0 1>;
-        };
-
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <1 2>;
-        };
-
-        bt_clear {
-            bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
-            layers = <2>;
-        };
-    };
-
     macros {
         macro_parens: macro_parens {
             compatible = "zmk,behavior-macro";
