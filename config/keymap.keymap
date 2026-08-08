@@ -63,35 +63,6 @@
     };
 
     macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-
-        zoom_in: zoom_in {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <15>; // 連続入力時の安定化
-            tap-ms = <15>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &msc SCRL_UP>
-                , <&macro_release &kp LCTRL>;
-        };
-
-        zoom_out: zoom_out {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <15>;
-            tap-ms = <15>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &msc SCRL_DOWN>
-                , <&macro_release &kp LCTRL>;
-        };
-
         macro_parens: macro_parens {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -226,21 +197,51 @@
 
         layer_2 {
             bindings = <
-&trans  &trans            &trans            &trans      &trans      &trans                      &trans          &trans         &trans            &trans             &trans         &trans
-&trans  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                  &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
-&trans  &kp N1            &kp N2            &kp N3      &kp N4      &kp N5      &trans  &trans  &kp LEFT_BRACE  &kp MINUS      &kp EQUAL         &kp RIGHT_BRACE    &kp COLON      &trans
-&trans  &kp N6            &kp N7            &kp N8      &kp N9      &kp N0      &trans  &trans  &kp LS(MINUS)   &kp LS(EQUAL)  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
-&trans  &trans            &trans            &trans      &trans      &trans      &trans  &trans  &kp TAB         &kp DEL        &trans            &trans             &trans         &trans
+&trans  &trans       &trans      &trans           &trans        &trans                          &trans        &trans           &trans            &trans         &trans       &trans
+&trans  &kp N1       &kp N2      &kp N3           &kp N4        &kp N5                          &none         &kp LS(UP)       &kp UP            &none          &none        &trans
+&trans  &kp N6       &kp N7      &kp N8           &kp N9        &kp N0   &trans         &trans  &kp HOME      &kp LEFT         &kp DOWN          &kp RIGHT      &kp LALT     &trans
+&trans  &kp LS(SEMI) &kp MINUS   &kp LS(JP_COLON) &kp FSLH      &kp DOT  &kp LS(MINUS)  &trans  &kp END       &kp LS(LEFT)     &kp LS(DOWN)      &kp LS(RIGHT)  &kp LSHFT    &trans
+&trans  &kp LCTRL    &kp LWIN    &kp LALT         &macro_parens &kp F10  &kp F2         &trans  &kp LA(ENTER) &trans           &trans            &trans         &trans       &trans
             >;
         };
 
         layer_3 {
             bindings = <
-&trans  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
-&trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME          &kp PG_UP  &kp PAGE_DOWN  &kp END    &kp ESCAPE  &trans
-&trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT          &kp DOWN   &kp UP_ARROW   &kp RIGHT  &kp TAB     &trans
-&trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
-&trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
+&trans  &trans        &trans        &trans        &trans          &trans                                                     &trans        &trans       &trans           &trans            &trans         &trans
+&trans  &kp LS(N7)    &kp LS(N2)    &kp JP_YEN    &none           &kp LS(SEMI)                                               &kp JP_YEN    &kp LS(0x87) &kp LS(N8)       &kp LS(N9)        &kp LS(N5)     &trans
+&trans  &kp JP_AT     &kp SEMI      &kp LS(N4)    &kp JP_LBRACKET &kp JP_RBRACKET  &trans               &trans               &kp LS(N3)    &mkp LCLK    &kp LS(JP_COLON) &mkp RCLK         &kp LS(MINUS)  &trans
+&trans  &kp LSHFT     &none         &kp JP_COLON  &none           &kp LS(N1)       &kp LS(JP_LBRACKET)  &kp LS(JP_RBRACKET)  &kp LS(N6)    &kp MINUS    &kp LS(COMMA)    &kp LS(DOT)       &kp LS(FSLH)   &trans
+&trans  &kp LCTRL     &kp LWIN      &kp LALT      &trans          &trans           &trans               &trans               &kp LC(ENTER) &trans       &trans           &kp LS(JP_CARET)  &trans         &trans
+            >;
+        };
+
+        layer_4 {
+            bindings = <
+&trans  &trans     &trans         &trans         &trans         &trans                             &trans        &trans     &trans      &trans       &trans      &trans
+&trans  &none      &kp TAB        &kp LC(UP)     &kp LG(UP)     &none                              &trans        &trans     &trans      &trans       &trans      &trans
+&trans  &kp LALT   &kp LC(LEFT)   &kp LC(DOWN)   &kp LC(RIGHT)  &none    &trans         &trans     &kp LC(C)     &mkp LCLK  &mkp RCLK   &mkp RCLK    &kp LALT    &trans
+&trans  &kp LSHFT  &kp LG(LEFT)   &kp LG(DOWN)   &kp LG(RIGHT)  &none    &kp LG(LC(T))  &kp LG(V)  &kp LC(V)     &kp LC(Z)  &kp LC(Y)   &none        &kp LSHFT   &trans
+&trans  &kp LCTRL  &kp LWIN       &kp LALT       &trans         &trans   &trans         &kp DEL    &kp LS(ENTER) &trans     &trans      &kp LC(X)    &trans      &trans
+            >;
+        };
+
+        layer_5 {
+            bindings = <
+&trans  &trans          &trans        &trans        &trans          &trans                            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3    &bt BT_SEL 4                      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans          &trans        &trans        &trans          &trans        &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt BT_CLR_ALL  &bt BT_CLR    &trans        &trans          &trans        &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp LCTRL       &kp LWIN      &kp LALT      &trans          &trans        &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_6 {
+            bindings = <
+&trans  &trans     &trans    &trans       &trans    &trans                                  &trans  &trans  &trans  &trans  &trans    &trans
+&trans  &kp F1     &kp F2    &kp F3       &kp F4    &kp F5                                  &trans  &trans  &trans  &trans  &trans    &trans
+&trans  &kp F6     &kp F7    &kp F8       &kp F9    &kp F10  &trans     &trans      &trans  &trans  &trans  &trans  &trans  &kp LALT  &trans
+&trans  &kp F11    &kp F12   &trans       &trans    &trans   &trans     &trans      &trans  &trans  &trans  &trans  &trans  &kp LSHFT &trans
+&trans  &kp LCTRL  &kp LWIN  &kp LALT     &kp TAB   &kp RET  &kp BSPC   &trans      &trans  &trans  &trans  &trans  &trans  &trans    &trans
             >;
         };
     };
