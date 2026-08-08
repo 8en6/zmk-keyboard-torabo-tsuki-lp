@@ -216,11 +216,11 @@
 
         layer_1 {
             bindings = <
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &mkp RCLK  &mkp LCLK  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
+&trans  &trans     &trans               &trans            &trans              &trans                            &trans          &trans           &trans            &trans         &trans    &trans
+&trans  &none      &none                &kp LC(LS(UP))    &kp PG_UP           &none                             &none           &kp LS(UP)       &kp UP            &none          &none     &trans
+&trans  &kp LALT   &kp LC(LS(LEFT))     &kp LC(LS(DOWN))  &kp LC(LS(RIGHT))   &kp HOME   &trans         &none   &kp HOME        &kp LEFT         &kp DOWN          &kp RIGHT      &kp LALT  &trans
+&trans  &kp LSHFT  &kp LA(PG_UP)        &kp PG_DN         &kp LA(PG_DN)       &kp END    &kp LG(LS(C))  &none   &kp END         &kp LS(LEFT)     &kp LS(DOWN)      &kp LS(RIGHT)  &kp LSHFT &trans
+&trans  &kp LCTRL  &kp LWIN             &kp LALT          &trans              &trans     &trans         &trans  &kp LA(ENTER)   &trans           &trans            &trans         &trans    &trans
             >;
         };
 
