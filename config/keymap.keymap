@@ -41,6 +41,7 @@
 //    scroll-layers = <3>;
 //};
 
+/ {
     macros {
         macro_parens: macro_parens {
             compatible = "zmk,behavior-macro";
