@@ -3,6 +3,42 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
+
+// -------------------------------------------------------------------------
+// JIS変換定義 (OSが日本語配列設定の場合の出力マッピング)
+// -------------------------------------------------------------------------
+#define JP_AT           LBKT             // @ (USの [ キー)
+#define JP_CARET        EQUAL            // ^ (USの = キー)
+#define JP_YEN          INT3             // ¥ (JISの ¥ キー)
+#define JP_PIPE         LS(INT3)         // | (Shift + ¥)
+#define JP_COLON        SQT              // : (USの ' キー)
+#define JP_LBRACKET     RBKT             // [ (USの ] キー)
+#define JP_RBRACKET     NUHS             // ] (USの \ キー / Non-US #)
+#define JP_UNDERSCORE   LS(INT1)         // _ (Shift + Ro)
+#define JP_BACKSLASH    INT1             // \ (Roキー)
+
+// Shiftが必要な記号
+#define JP_DQUOTE       LS(N2)           // "
+#define JP_AMPERSAND    LS(N6)           // &
+#define JP_QUOTE        LS(N7)           // '
+#define JP_LPAREN       LS(N8)           // (
+#define JP_RPAREN       LS(N9)           // )
+#define JP_EQUAL        LS(MINUS)        // =
+#define JP_PLUS         LS(SEMI)         // +
+#define JP_ASTERISK     LS(SQT)          // *
+#define JP_TILD         LS(EQUAL)        // ~
+#define JP_GRAVE        LS(LBKT)         // `
+#define JP_LBRACE       LS(RBKT)         // {
+#define JP_RBRACE       LS(NUHS)         // }
+
+
+&pointing_device {
+    scroll-layers = <3>;
+};
 
 / {
     combos {
