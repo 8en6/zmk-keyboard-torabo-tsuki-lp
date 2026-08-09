@@ -37,7 +37,7 @@
 #define JP_RBRACE       LS(NUHS)         // }
 
 
-&pointing_device {
+&trackball {
     scroll-layers = <3>;
 };
 
