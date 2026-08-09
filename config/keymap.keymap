@@ -150,11 +150,11 @@
 
         layer_1 {
             bindings = <
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &mkp RCLK  &mkp LCLK  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans
+&trans  &trans     &trans               &trans            &trans              &trans                            &trans          &trans           &trans            &trans         &trans    &trans
+&trans  &none      &none                &kp LC(LS(UP))    &kp PG_UP           &none                             &none           &kp LS(UP)       &kp UP            &none          &none     &trans
+&trans  &kp LALT   &kp LC(LS(LEFT))     &kp LC(LS(DOWN))  &kp LC(LS(RIGHT))   &kp HOME   &trans         &none   &kp HOME        &kp LEFT         &kp DOWN          &kp RIGHT      &kp LALT  &trans
+&trans  &kp LSHFT  &kp LA(PG_UP)        &kp PG_DN         &kp LA(PG_DN)       &kp END    &kp LG(LS(C))  &none   &kp END         &kp LS(LEFT)     &kp LS(DOWN)      &kp LS(RIGHT)  &kp LSHFT &trans
+&trans  &kp LCTRL  &kp LWIN             &kp LALT          &trans              &trans     &trans         &trans  &kp LA(ENTER)   &trans           &trans            &trans         &trans    &trans
             >;
         };
 
@@ -170,11 +170,11 @@
 
         layer_3 {
             bindings = <
-&trans  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
-&trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME          &kp PG_UP  &kp PAGE_DOWN  &kp END    &kp ESCAPE  &trans
-&trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT          &kp DOWN   &kp UP_ARROW   &kp RIGHT  &kp TAB     &trans
-&trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
-&trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
+&trans  &trans        &trans        &trans        &trans          &trans                                                     &trans        &trans       &trans           &trans            &trans         &trans
+&trans  &kp LS(N7)    &kp LS(N2)    &kp JP_YEN    &none           &kp LS(SEMI)                                               &kp JP_YEN    &kp LS(0x87) &kp LS(N8)       &kp LS(N9)        &kp LS(N5)     &trans
+&trans  &kp JP_AT     &kp SEMI      &kp LS(N4)    &kp JP_LBRACKET &kp JP_RBRACKET  &trans               &trans               &kp LS(N3)    &mkp LCLK    &kp LS(JP_COLON) &mkp RCLK         &kp LS(MINUS)  &trans
+&trans  &kp LSHFT     &none         &kp JP_COLON  &none           &kp LS(N1)       &kp LS(JP_LBRACKET)  &kp LS(JP_RBRACKET)  &kp LS(N6)    &kp MINUS    &kp LS(COMMA)    &kp LS(DOT)       &kp LS(FSLH)   &trans
+&trans  &kp LCTRL     &kp LWIN      &kp LALT      &trans          &trans           &trans               &trans               &kp LC(ENTER) &trans       &trans           &kp LS(JP_CARET)  &trans         &trans
             >;
         };
     };
