@@ -36,11 +36,6 @@
 #define JP_LBRACE       LS(RBKT)         // {
 #define JP_RBRACE       LS(NUHS)         // }
 
-
-&trackball {
-    scroll-layers = <3>;
-};
-
 / {
     macros {
         macro_parens: macro_parens {
@@ -208,4 +203,8 @@
             >;
         };
     };
+};
+
+&trackball {
+    scroll-layers = <3>;
 };
