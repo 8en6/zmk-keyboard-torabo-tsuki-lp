@@ -3,6 +3,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
+
 &mt {
     flavor = "balanced";
     quick-tap-ms = <0>;
@@ -36,9 +37,9 @@
 #define JP_RBRACE       LS(NUHS)         // }
 
 
-&pointing_device {
-    scroll-layers = <3>;
-};
+//&pointing_device {
+//    scroll-layers = <3>;
+//};
 
 / {
     combos {
