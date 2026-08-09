@@ -205,6 +205,6 @@
     };
 };
 
-&trackball {
+&pointing_listener {
     scroll-layers = <3>;
 };
