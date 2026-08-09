@@ -77,6 +77,64 @@
         };
     };
 
+    behaviors {
+        // 高速タイピング用のMod-Tap設定（Home Row Mods用）
+        mt_tap: mod_tap_preferred {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";      // ★重要：他のキーと重なってもTap（文字）を優先する
+            tapping-term-ms = <200>;       // 長押しの判定時間（好みで調整）
+            quick-tap-ms = <150>;          // 連続タップで文字をリピートさせる
+            require-prior-idle-ms = <125>; // ★超重要：直前に別のキーを打っていたら、強制的にTapにする
+            bindings = <&kp>, <&kp>;
+        };
+        
+        // KとL専用の遅いLayer-Tap
+        lt_slow: layer_tap_slow {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred"; // 短く押した時は確実にキー入力を優先
+            tapping-term-ms = <250>;  // ★ここを好みの長さに設定（デフォルトは200）
+            quick-tap-ms = <200>;     // 連続タップ時のレイヤー暴発防止
+            require-prior-idle-ms = <125>; // ★これを追加：直前に別のキー入力があれば絶対にTap(文字)にする
+            bindings = <&mo>, <&kp>;  // 長押しでレイヤー(&mo)、短押しでキー(&kp)
+            
+            display-name = "Layer Tap Slow";
+        };
+
+        // ダブルタップ＆ホールドで連続バックスペースになるLayer-Tap
+        lt_bspc: layer_tap_backspace {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>; // 通常の長押し（Hold）判定時間
+            quick-tap-ms = <200>;    // ★ここがダブルタップリピートの受付時間です
+            bindings = <&mo>, <&kp>; // ※もしMod-Tapとして使う場合は <&kp>, <&kp> にしてください
+        };
+
+        // ① カンマ用：ホールドでMB3、タップで通常のキー（bindingsを同一種にするためマクロでラップ）
+        p_mt_mb3: p_mt_mb3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <125>;
+            bindings = <&mclk_macro_hold>, <&kp>; // 両方とも「マクロ」として扱うことでエラーを回避
+        };
+
+        // ② ドット用：ホールドでCtrl+MB3、タップで通常のキー
+        p_mt_ctrl_mb3: p_mt_ctrl_mb3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <125>;
+            bindings = <&ctrl_mclk_macro_hold>, <&kp>; // 両方とも「マクロ」として扱う
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
