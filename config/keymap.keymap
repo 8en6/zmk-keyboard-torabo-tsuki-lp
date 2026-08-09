@@ -86,13 +86,6 @@
             tapping-term-ms = <200>;
         };
 
-        // スクロール用のbehaviorの設定
-        scroll_down_up: scroll_down_up {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-        };
-
         // 高速タイピング用のMod-Tap設定（Home Row Mods用）
         mt_tap: mod_tap_preferred {
             compatible = "zmk,behavior-hold-tap";
