@@ -37,9 +37,9 @@
 #define JP_RBRACE       LS(NUHS)         // }
 
 
-&pointing_device {
-    scroll-layers = <3>;
-};
+//&pointing_device {
+//    scroll-layers = <3>;
+//};
 
     macros {
         macro_parens: macro_parens {
