@@ -130,6 +130,15 @@
         };
     };
 
+    /* ★ここを追加：トラックボールの動きをスクロール（REL_WHEEL）に変換する設定 */
+    zip_scroll_scaler: zip_scroll_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
+        track-remainders;
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -205,6 +214,8 @@
     };
 };
 
-&pointing_device {
-    scroll-layers = <3>;
+&pointing_listener {
+    status = "okay";
+    /* レイヤー3がアクティブな時だけスクロール処理を適用 */
+    input-processors = <&zip_scroll_scaler 1 1>;
 };
