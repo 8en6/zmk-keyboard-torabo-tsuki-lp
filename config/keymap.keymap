@@ -205,6 +205,6 @@
     };
 };
 
-&pointing_listener {
+&pointing_device {
     scroll-layers = <3>;
 };
