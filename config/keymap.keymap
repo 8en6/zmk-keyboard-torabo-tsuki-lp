@@ -38,6 +38,17 @@
 #define JP_RBRACE       LS(NUHS)         // }
 
 / {
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        input-processors = <&mouse_runtime_input_processor>;
+
+        /* Layer 3 (ARROW): convert cursor movement to scroll */
+        scroller {
+            layers = <3>;
+            input-processors = <&zip_xy_to_scroll_mapper &scroll_runtime_input_processor>;
+        };
+    };
     macros {
         macro_parens: macro_parens {
             compatible = "zmk,behavior-macro";
@@ -213,11 +224,4 @@
             >;
         };
     };
-};
-
-&pointing_listener {
-    status = "okay";
-    device = <&pointing_device>; // ★これが不足していたためエラーになっていました！
-    input-processors = <&zip_scroll_scaler 1 1>;
-    layers = <3>; // レイヤー3が押されている間スクロールにする設定
 };
