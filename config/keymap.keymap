@@ -73,18 +73,6 @@
         };
     };
 
-    pointing_listener: pointing_listener {
-        compatible = "zmk,input-listener";
-        device = <&pointing_device>; // 必須のdevice指定
-        status = "okay";
-
-        /* スクロール用の設定（レイヤー3がアクティブな時にスクロールに変換） */
-        scroller {
-            layers = <3>;
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
-    };
-
     behaviors {
         // 高速タイピング用のMod-Tap設定（Home Row Mods用）
         mt_tap: mod_tap_preferred {
@@ -215,5 +203,12 @@
 &trans  &kp LCTRL  &kp LWIN  &kp LALT     &kp TAB   &kp RET  &kp BSPC   &trans      &trans  &trans  &trans  &trans  &trans  &trans    &trans
             >;
         };
+    };
+};
+
+&pointing_listener {
+    scroller {
+        layers = <3>;
+        input-processors = <&zip_xy_to_scroll_mapper>;
     };
 };
