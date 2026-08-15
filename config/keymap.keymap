@@ -177,7 +177,7 @@
         layer_4 {
             bindings = <
 &trans  &trans     &trans         &trans         &trans         &trans                             &trans        &trans     &trans      &trans       &trans      &trans
-&trans  &none      &kp TAB        &kp LC(UP)     &kp LG(UP)     &none                              &trans        &trans     &kp MB3     &trans       &trans      &trans
+&trans  &none      &kp TAB        &kp LC(UP)     &kp LG(UP)     &none                              &trans        &trans     &mkp MB3     &trans       &trans      &trans
 &trans  &kp LALT   &kp LC(LEFT)   &kp LC(DOWN)   &kp LC(RIGHT)  &none    &trans         &trans     &kp LC(C)     &mkp LCLK  &mkp RCLK   &mkp RCLK    &kp LALT    &trans
 &trans  &kp LSHFT  &kp LG(LEFT)   &kp LG(DOWN)   &kp LG(RIGHT)  &none    &kp LG(LC(T))  &kp LG(V)  &kp LC(V)     &kp LC(Z)  &kp LC(Y)   &none        &kp LSHFT   &trans
 &trans  &kp LCTRL  &kp LWIN       &kp LALT       &trans         &trans   &trans         &kp DEL    &kp LS(ENTER) &trans     &trans      &kp LC(X)    &trans      &trans
