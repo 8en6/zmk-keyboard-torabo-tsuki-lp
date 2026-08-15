@@ -208,7 +208,7 @@
 
 &pointing_listener {
     /* 通常時のトラックボール操作速度（ポインタ移動速度）を調整 */
-input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_scaler 2 5>;
+input-processors = <&zip_xy_scaler 2 5>;
 
     scroller {
         layers = <3>;
