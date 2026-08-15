@@ -39,6 +39,36 @@
 
 / {
     macros {
+        // enダッシュ (Alt + 0150)
+        en_dash: en_dash {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N0>
+                , <&macro_release &kp LALT>;
+        };
+
+        // emダッシュ (Alt + 0151)
+        em_dash: em_dash {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N1>
+                , <&macro_release &kp LALT>;
+        };
+
+        // 数学マイナス記号 (Alt + 8722)
+        math_minus: math_minus {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LALT>
+                , <&macro_tap &kp KP_N8 &kp KP_N7 &kp KP_N2 &kp KP_N2>
+                , <&macro_release &kp LALT>;
+        };
+        
         macro_parens: macro_parens {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -168,8 +198,8 @@
             bindings = <
 &trans  &trans        &trans        &trans        &trans          &trans                                                     &trans        &trans       &trans           &trans            &trans         &trans
 &trans  &kp LS(N7)    &kp LS(N2)    &kp JP_YEN    &none           &kp LS(SEMI)                                               &kp JP_YEN    &kp LS(0x87) &kp LS(N8)       &kp LS(N9)        &kp LS(N5)     &trans
-&trans  &kp JP_AT     &kp SEMI      &kp LS(N4)    &kp JP_LBRACKET &kp JP_RBRACKET  &trans               &trans               &kp LS(N3)    &mkp LCLK    &kp LS(JP_COLON) &mkp RCLK         &kp LS(MINUS)  &trans
-&trans  &kp LSHFT     &none         &kp JP_COLON  &none           &kp LS(N1)       &kp LS(JP_LBRACKET)  &kp LS(JP_RBRACKET)  &kp LS(N6)    &kp MINUS    &kp LS(COMMA)    &kp LS(DOT)       &kp LS(FSLH)   &trans
+&trans  &kp JP_AT     &kp SEMI      &kp LS(N4)    &kp JP_LBRACKET &kp JP_RBRACKET  &trans               &trans               &kp LS(N3)    &mkp LCLK    &kp LS(JP_COLON) &mkp RCLK         &en_dash       &trans
+&trans  &kp LSHFT     &none         &kp JP_COLON  &none           &kp LS(N1)       &kp LS(JP_LBRACKET)  &kp LS(JP_RBRACKET)  &kp LS(N6)    &math_minus  &kp LS(COMMA)    &kp LS(DOT)       &kp LS(FSLH)   &trans
 &trans  &kp LCTRL     &kp LWIN      &kp LALT      &trans          &trans           &trans               &trans               &kp LC(ENTER) &trans       &trans           &kp LS(JP_CARET)  &trans         &trans
             >;
         };
