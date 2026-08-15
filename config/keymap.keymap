@@ -213,6 +213,6 @@ input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFOR
     scroller {
         layers = <3>;
         /* スクロール速度を調整（例：感度を半分の 1/4 に落とす） */
-        input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 4>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 4>;
     };
 };
