@@ -5,6 +5,7 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/input_transform.h>
 #include <scroll-snap.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 
 &mt {
     flavor = "balanced";
@@ -269,6 +270,15 @@
     };
 };
 
+
+/* DYA Studioのスクロール倍率は従来値1xに設定してから、固定倍率1/4を適用。
+   内蔵の慣性と固定軸スナップは無効のまま (roBa方式に任せる)。 */
+&scroll_runtime_input_processor {
+    scale-multiplier = <1>;
+    scale-divisor = <1>;
+    active-layers = <0x00000010>; // スクロールレイヤー4
+};
+
 // roBa と同じ方向固定。縦横どちらかに判定して斜め入力を抑える。
 &zip_scroll_snap {
     x-threshold = <1 1>;
@@ -300,11 +310,11 @@
 
 &pointing_listener {
     /* 通常時のトラックボール操作速度（ポインタ移動速度）を調整 */
-input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 2 5>;
+input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>, <&mouse_runtime_input_processor>, <&zip_xy_scaler 2 5>;
 
     scroller {
         layers = <4>;
         /* スクロール速度を調整（例：感度を半分の 1/4 に落とす） */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&torabo_scroll_inertia>, <&zip_scroll_scaler 1 4>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>, <&zip_scroll_snap>, <&torabo_scroll_inertia>, <&zip_scroll_scaler 1 4>;
     };
 };

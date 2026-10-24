@@ -2,6 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: cormoran
+      url-base: https://github.com/cormoran
     - name: sekigon-gonnoc
       url-base: https://github.com/sekigon-gonnoc
     - name: kot149
@@ -10,8 +12,8 @@ manifest:
       url-base: https://github.com/8en6
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: v0.3
+      remote: cormoran
+      revision: v0.3-branch+dya
       import: app/west.yml
     - name: zmk-component-bmp-boost
       remote: sekigon-gonnoc
@@ -36,6 +38,21 @@ manifest:
       revision: v1
     - name: zmk-input-processor-scroll-inertia
       remote: 8en6
+      revision: main
+    # DYA Studio: minimal v0.3-compatible feature set (experimental).
+    - name: zmk-feature-custom-settings
+      remote: cormoran
+      # 2026-07-08 configdefault MAIN_STACK_SIZE requires newer Kconfig;
+      # pin the preceding revision for Zephyr 3.5 (experimental)
+      revision: 56ad4260388486e513f07c45a6ab1a404e3e7878
+    - name: zmk-module-settings-rpc
+      remote: cormoran
+      revision: main
+    - name: zmk-module-runtime-input-processor
+      remote: cormoran
+      revision: main
+    - name: zmk-module-ble-management
+      remote: cormoran
       revision: main
   self:
     path: config
