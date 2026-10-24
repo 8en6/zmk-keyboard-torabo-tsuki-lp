@@ -4,6 +4,7 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/input_transform.h>
+#include <scroll-snap.dtsi>
 
 &mt {
     flavor = "balanced";
@@ -104,6 +105,26 @@
     };
 
     behaviors {
+        // z: 1 tap = z, 2 taps = Z, hold = Left Shift (roBa/moNa2 と同じ)
+        zfold: zfold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ZFOLD";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            tapping-term-ms = <300>;
+            flavor = "hold-preferred";
+            quick-tap-ms = <150>;
+            hold-while-undecided;
+        };
+
+        zfoldZ: zfoldZ {
+            compatible = "zmk,behavior-tap-dance";
+            label = "ZFOLDZ";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&zfold LEFT_SHIFT Z>, <&kp LS(Z)>;
+        };
+
         // 高速タイピング用のMod-Tap設定（Home Row Mods用）
         mt_tap: mod_tap_preferred {
             compatible = "zmk,behavior-hold-tap";
@@ -169,7 +190,7 @@
 &none      &none             &none         &none         &none       &none                                                      &none        &none  &none               &none                &none                &none
 &none      &lt_slow 4 Q      &kp W         &kp E         &kp R       &kp T                                                      &kp Y        &kp U  &kp I               &lt_slow 4 O         &kp P                &none
 &none      &mt_tap LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 3 K        &lt_slow 4 L         &mt_tap LALT MINUS   &none
-&none      &mt_tap LSHFT Z   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
+&none      &zfoldZ   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
 &none      &kp LCTRL         &kp LWIN      &kp LEFT_ALT  &lt 1 LANG2  &lt 4 SPACE  &lt 3 LANG1                 &lt_bspc 6 BSPC    &lt 2 RET    &none  &none               &kp JP_CARET         &lt 5 ESC            &none
             >;
         };
@@ -236,6 +257,35 @@
     };
 };
 
+// roBa と同じ方向固定。縦横どちらかに判定して斜め入力を抑える。
+&zip_scroll_snap {
+    x-threshold = <1 1>;
+    y-threshold = <1 1>;
+    require-n-samples = <4>;
+    lock-duration-ms = <200>;
+    lock-for-next-n-events = <8>;
+    idle-reset-timeout-ms = <180>;
+};
+
+/ {
+    // フリック開始・減速は縦横共通。toraboの既存スクロール倍率 (1/4) と整合。
+    torabo_scroll_inertia: torabo_scroll_inertia {
+        compatible = "zmk,input-processor-scroll-inertia";
+        status = "disabled"; // 周辺ビルドではコンパイルしない（中央のみ有効化）
+        #input-processor-cells = <0>;
+        axis = <0>;
+        layer = <3>;
+        scale = <1>;
+        scale-div = <4>;
+        start = <20>;
+        move = <10>;
+        min-events = <3>;
+        decay-fast = <990>;
+        friction = <25>;
+        stop = <2>;
+    };
+};
+
 &pointing_listener {
     /* 通常時のトラックボール操作速度（ポインタ移動速度）を調整 */
 input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 2 5>;
@@ -243,6 +293,6 @@ input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFOR
     scroller {
         layers = <3>;
         /* スクロール速度を調整（例：感度を半分の 1/4 に落とす） */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 4>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&torabo_scroll_inertia>, <&zip_scroll_scaler 1 4>;
     };
 };
