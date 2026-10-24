@@ -283,6 +283,7 @@
     // フリック開始・減速は縦横共通。toraboの既存スクロール倍率 (1/4) と整合。
     torabo_scroll_inertia: torabo_scroll_inertia {
         compatible = "zmk,input-processor-scroll-inertia";
+        status = "disabled"; // 周辺ビルドではコンパイルしない（中央のみ有効化）
         #input-processor-cells = <0>;
         axis = <0>;
         layer = <4>;
