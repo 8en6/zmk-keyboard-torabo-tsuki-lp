@@ -42,7 +42,9 @@ manifest:
     # DYA Studio: minimal v0.3-compatible feature set (experimental).
     - name: zmk-feature-custom-settings
       remote: cormoran
-      revision: main
+      # 2026-07-08 configdefault MAIN_STACK_SIZE requires newer Kconfig;
+      # pin the preceding revision for Zephyr 3.5 (experimental)
+      revision: 56ad4260388486e513f07c45a6ab1a404e3e7878
     - name: zmk-module-settings-rpc
       remote: cormoran
       revision: main
