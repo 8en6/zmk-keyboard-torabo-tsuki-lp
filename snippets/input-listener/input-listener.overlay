@@ -2,3 +2,9 @@
     status = "okay";
     device = <&pointing_device>;
 };
+
+// スクロール慣性は中央側のHID APIを使うため、central用snipでのみ有効化。
+// 周辺側はconfig/keymap.keymapのdisabled設定を維持する。
+&torabo_scroll_inertia {
+    status = "okay";
+};
