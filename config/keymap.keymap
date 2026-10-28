@@ -105,24 +105,35 @@
     };
 
     behaviors {
-        // z: 1 tap = z, 2 taps = Z, hold = Left Shift (roBa/moNa2 と同じ)
-        zfold: zfold {
-            compatible = "zmk,behavior-hold-tap";
-            label = "ZFOLD";
-            #binding-cells = <2>;
-            bindings = <&kp>, <&kp>;
-            tapping-term-ms = <300>;
-            flavor = "hold-preferred";
-            quick-tap-ms = <150>;
-            hold-while-undecided;
-        };
-
-        zfoldZ: zfoldZ {
+        // Z: normal Japanese typing first; hold 170 ms = Shift.
+        z_tapdance: z_tapdance {
             compatible = "zmk,behavior-tap-dance";
-            label = "ZFOLDZ";
+            label = "Z_TAPDANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&zfold LEFT_SHIFT Z>, <&kp LS(Z)>;
+            bindings = <&kp Z>, <&kp LS(Z)>;
+        };
+
+        z_shift: z_shift {
+            compatible = "zmk,behavior-hold-tap";
+            label = "Z_SHIFT";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&z_tapdance>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <170>;
+            quick-tap-ms = <0>;
+            require-prior-idle-ms = <125>;
+        };
+
+        // A: keep letter taps responsive, delay hold Alt to 320 ms.
+        a_alt_slow: a_alt_slow {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <320>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <125>;
         };
 
         // 高速タイピング用のMod-Tap設定（Home Row Mods用）
@@ -190,8 +201,8 @@
             bindings = <
 &none      &none             &none         &none         &none       &none                                                      &none        &none  &none               &none                &none                &none
 &none      &lt_slow 5 Q      &kp W         &kp E         &kp R       &kp T                                                      &kp Y        &kp U  &kp I               &lt_slow 5 O         &kp P                &none
-&none      &mt_tap LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
-&none      &zfoldZ   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
+&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
+&none      &z_shift LSHFT 0   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
 &none      &kp LGUI          &kp LG(H)      &kp LEFT_ALT  &lt 2 LANG2  &lt 5 SPACE  &lt 4 LANG1                 &lt_bspc 7 BSPC    &lt 3 RET    &none  &none               &kp JP_CARET         &lt 6 ESC            &none
             >;
         };
@@ -201,8 +212,8 @@
             bindings = <
 &none      &none             &none         &none         &none       &none                                                      &none        &none  &none               &none                &none                &none
 &none      &lt_slow 5 Q      &kp W         &kp E         &kp R       &kp T                                                      &kp Y        &kp U  &kp I               &lt_slow 5 O         &kp P                &none
-&none      &mt_tap LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
-&none      &zfoldZ   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
+&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
+&none      &z_shift LSHFT 0   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
 &none      &kp LCTRL         &kp LWIN      &kp LEFT_ALT  &lt 2 LANG2  &lt 5 SPACE  &lt 4 LANG1                 &lt_bspc 7 BSPC    &lt 3 RET    &none  &none               &kp JP_CARET         &lt 6 ESC            &none
             >;
         };
