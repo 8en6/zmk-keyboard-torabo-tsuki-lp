@@ -4,6 +4,7 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <scroll-snap.dtsi>
 
 &mt {
@@ -280,6 +281,18 @@
     };
 };
 
+/ {
+    // roBaと同様、横スクロール成分だけ50%にする。
+    // 縦方向と全体倍率1/4は変更しない。
+    torabo_horizontal_scroll_scaler: torabo_horizontal_scroll_scaler {
+        compatible = "zmk,input-processor-scaler";
+        #input-processor-cells = <2>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_HWHEEL>;
+        track-remainders;
+    };
+};
+
 // roBa と同じ方向固定。縦横どちらかに判定して斜め入力を抑える。
 &zip_scroll_snap {
     x-threshold = <1 1>;
@@ -316,6 +329,6 @@ input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFOR
     scroller {
         layers = <4>;
         /* スクロール速度を調整（例：感度を半分の 1/4 に落とす） */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&torabo_scroll_inertia>, <&zip_scroll_scaler 1 4>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&torabo_horizontal_scroll_scaler 1 2>, <&torabo_scroll_inertia>, <&zip_scroll_scaler 1 4>;
     };
 };
