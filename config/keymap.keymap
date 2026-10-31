@@ -287,6 +287,16 @@
 &trans  &kp LCTRL  &kp LWIN  &kp LALT     &kp TAB   &kp RET  &kp BSPC   &trans      &trans  &trans  &trans  &trans  &trans  &trans    &trans
             >;
         };
+
+        z_next_uppercase {
+            bindings = <
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &kp LS(Z) &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            >;
+        };
     };
 };
 
@@ -299,15 +309,7 @@
         type = <INPUT_EV_REL>;
         codes = <INPUT_REL_HWHEEL>;
         track-remainders;
-        z_next_uppercase {
-            bindings = <
-&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &kp LS(Z) &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-            >;
-        };
+
 
     };
 };
