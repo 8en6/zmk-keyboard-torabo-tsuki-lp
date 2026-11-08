@@ -146,6 +146,17 @@
             require-prior-idle-ms = <125>;
         };
 
+        // 右Shift専用: 左Zと同じ170ms。通常のスラッシュ入力はタップ優先。
+        slash_shift_fast: slash_shift_fast {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <170>;
+            quick-tap-ms = <0>;
+            require-prior-idle-ms = <125>;
+        };
+
         // 高速タイピング用のMod-Tap設定（Home Row Mods用）
         mt_tap: mod_tap_preferred {
             compatible = "zmk,behavior-hold-tap";
@@ -211,8 +222,8 @@
             bindings = <
 &none      &none             &none         &none         &none       &none                                                      &none        &none  &none               &none                &none                &none
 &none      &lt_slow 5 Q      &kp W         &kp E         &kp R       &kp T                                                      &kp Y        &kp U  &kp I               &lt_slow 5 O         &kp P                &none
-&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
-&none      &z_shift 0 Z   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
+&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &a_alt_slow LALT MINUS   &none
+&none      &z_shift 0 Z   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &slash_shift_fast LSHFT SLASH  &none
 &none      &kp LGUI          &kp LG(H)      &kp LEFT_ALT  &lt 2 LANG2  &lt 5 SPACE  &lt 4 LANG1                 &lt_bspc 7 BSPC    &lt 3 RET    &none  &none               &kp JP_CARET         &lt 6 ESC            &none
             >;
         };
@@ -222,8 +233,8 @@
             bindings = <
 &none      &none             &none         &none         &none       &none                                                      &none        &none  &none               &none                &none                &none
 &none      &lt_slow 5 Q      &kp W         &kp E         &kp R       &kp T                                                      &kp Y        &kp U  &kp I               &lt_slow 5 O         &kp P                &none
-&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &mt_tap LALT MINUS   &none
-&none      &z_shift 0 Z   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &mt_tap LSHFT SLASH  &none
+&none      &a_alt_slow LALT A    &kp S         &kp D         &kp F       &kp G        &none                      &none              &kp H        &kp J  &lt_slow 4 K        &lt_slow 5 L         &a_alt_slow LALT MINUS   &none
+&none      &z_shift 0 Z   &kp X         &kp C         &kp V       &kp B        &kp JP_LBRACKET            &kp JP_RBRACKET    &kp N        &kp M  &kp COMMA           &kp DOT              &slash_shift_fast LSHFT SLASH  &none
 &none      &kp LCTRL         &kp LWIN      &kp LEFT_ALT  &lt 2 LANG2  &lt 5 SPACE  &lt 4 LANG1                 &lt_bspc 7 BSPC    &lt 3 RET    &none  &none               &kp JP_CARET         &lt 6 ESC            &none
             >;
         };
